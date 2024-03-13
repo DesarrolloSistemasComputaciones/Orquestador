@@ -54,7 +54,7 @@ public class OrquestadorController implements Orquestador {
         String jsonBody3 = "{\"data\": [{\"header\": {\"id\": \"12345\",\"type\": \"TestGiraffeRefrigerator\"},\"enigma\": \"2\"}]}";
         String answer3 = sendRequestAndGetAnswer(jsonBody3, "http://localhost:8083/v1/getOneEnigma/getStep");
 
-        String concatenatedAnswer = answer1 + " - " + answer2 + " - " + answer3;
+        String concatenatedAnswer = answer1.concat(" - ").concat(answer2).concat(" - ").concat(answer3);
 
         return concatenatedAnswer;
     }
