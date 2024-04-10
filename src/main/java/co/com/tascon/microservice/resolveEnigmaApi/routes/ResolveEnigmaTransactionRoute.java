@@ -21,7 +21,6 @@ public class ResolveEnigmaTransactionRoute extends RouteBuilder{
 		
 		from("direct:resolve-enigma")
 			.routeId("resolveEnigma")
-//				.log("Request Body ${body}")
 				.process( new Processor() {
 					
 					@Override
@@ -35,16 +34,11 @@ public class ResolveEnigmaTransactionRoute extends RouteBuilder{
 							exchange.setProperty( "descError", "No Error");
 					}					
 				})
+				
 				//Invocaciones Secuenciales
 				.to("direct:get-step-one")
 				.to("direct:get-step-two")
 				.to("direct:get-step-three")
-				
-//				// invocaciones parelelas
-//				.multicast(myAggregationStrategy)
-//				.parallelProcessing()
-//				.to("direct:get-step-one", "direct:get-step-two", "direct:get-step-three")
-				
 				.choice()
 				.when(exchangeProperty("Error").isEqualTo("0000") )
 					.to("direct:generate-response-success")
